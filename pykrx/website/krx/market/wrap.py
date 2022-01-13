@@ -616,8 +616,8 @@ def get_index_ohlcv_by_date(fromdate: str, todate: str, ticker: str) -> DataFram
 
     df = 개별지수시세().fetch(ticker[1:], ticker[0], fromdate, todate)
     df = df[['TRD_DD', 'OPNPRC_IDX', 'HGPRC_IDX', 'LWPRC_IDX',
-             'CLSPRC_IDX', 'ACC_TRDVOL', 'ACC_TRDVAL']]
-    df.columns = ['날짜', '시가', '고가', '저가', '종가', '거래량', '거래대금']
+             'CLSPRC_IDX', 'ACC_TRDVOL', 'ACC_TRDVAL', 'MKTCAP']]
+    df.columns = ['날짜', '시가', '고가', '저가', '종가', '거래량', '거래대금', '시가총액']
     df = df.replace('[^-\w\.]', '', regex=True)
     df = df.replace('\-$', '0', regex=True)
     df = df.replace('', '0')
@@ -653,8 +653,8 @@ def get_index_ohlcv_by_ticker(date: str, market: str="KOSPI") -> DataFrame:
     market = {"KRX": "01", "KOSPI": "02", "KOSDAQ": "03", "테마": "04"}[market]
     df = 전체지수시세().fetch(date, market)
     df = df[['IDX_NM', 'OPNPRC_IDX', 'HGPRC_IDX', 'LWPRC_IDX',
-             'CLSPRC_IDX', 'ACC_TRDVOL', 'ACC_TRDVAL']]
-    df.columns = ['지수명', '시가', '고가', '저가', '종가', '거래량', '거래대금']
+             'CLSPRC_IDX', 'ACC_TRDVOL', 'ACC_TRDVAL', 'MKTCAP']]
+    df.columns = ['지수명', '시가', '고가', '저가', '종가', '거래량', '거래대금', '시가총액']
     df = df.replace('[^-\w\.]', '', regex=True)
     df = df.replace('\-$', '0', regex=True)
     df = df.replace('', '0')
